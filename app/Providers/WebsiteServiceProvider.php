@@ -16,9 +16,14 @@ class WebsiteServiceProvider extends ServiceProvider
 
     public function boot(): void
     {
-        if (Schema::hasTable('settings')) {
-            $settings = Setting::all()->pluck('value', 'key');
-            View::share('g_settings', $settings);
+        try {
+            if (Schema::hasTable('settings')) {
+                $settings = Setting::all()->pluck('value', 'key');
+                View::share('g_settings', $settings);
+            }
+        } catch (\Exception $e) {
+            // Silently fail to allow running migrations via /init-db
+            View::share('g_settings', []);
         }
     }
 }
