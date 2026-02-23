@@ -29,8 +29,13 @@ class AppServiceProvider extends ServiceProvider
             
             // Redirect various paths to /tmp
             config(['view.compiled' => "$storagePath/framework/views"]);
-            config(['session.files' => "$storagePath/framework/sessions"]);
             config(['cache.stores.file.path' => "$storagePath/framework/cache"]);
+            
+            // Use database sessions for persistence in serverless environment
+            config(['session.driver' => 'database']);
+            config(['session.secure' => true]);
+            config(['session.http_only' => true]);
+            config(['session.same_site' => 'lax']);
             
             // Critical: Redirect logs to stderr to avoid read-only filesystem error
             config(['logging.default' => 'stderr']);
