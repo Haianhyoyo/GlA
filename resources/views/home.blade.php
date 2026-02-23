@@ -167,7 +167,7 @@
                 </h2>
                 <div style="margin-bottom: 25px;">
                     <h3 style="color: var(--secondary-blue); font-size: 1.2rem; margin-bottom: 15px;"><i class="fas fa-map-marker-alt" style="margin-right: 15px; width: 20px; color: var(--primary-blue);"></i> ĐỊA CHỈ</h3>
-                    <p style="padding-left: 35px; color: var(--gray-text);">{{ $g_settings['address'] ?? 'Số 10, ngõ 183, Đặng Tiến Đông, Đống Đa, Hà Nội' }}</p>
+                    <p style="padding-left: 35px; color: var(--gray-text);">{{ $g_settings['address'] ?? 'Số 32, Tổ 31A Phố Nam Đồng, Phường Kim Liên, Thành Phố Hà Nội' }}</p>
                 </div>
                 <div style="margin-bottom: 25px;">
                     <h3 style="color: var(--secondary-blue); font-size: 1.2rem; margin-bottom: 15px;"><i class="fas fa-phone-alt" style="margin-right: 15px; width: 20px; color: var(--primary-blue);"></i> HOTLINE</h3>

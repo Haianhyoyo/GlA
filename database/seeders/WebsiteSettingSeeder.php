@@ -27,7 +27,7 @@ class WebsiteSettingSeeder extends Seeder
             ],
             [
                 'key' => 'address',
-                'value' => 'Số 10, ngõ 183, Đặng Tiến Đông, Đống Đa, Hà Nội',
+                'value' => 'Số 32, Tổ 31A Phố Nam Đồng, Phường Kim Liên, Thành Phố Hà Nội',
                 'type' => 'text',
             ],
             [
