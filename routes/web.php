@@ -5,39 +5,6 @@ use App\Http\Controllers\ConsultationController;
 use App\Http\Controllers\Admin\AuthController as AdminAuthController;
 use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
 
-Route::get('/init-db', function () {
-    // Force some configs to ensure we can run migrations
-    config(['session.driver' => 'file']);
-    config(['app.debug' => true]);
-
-    $step = request('step', 'all');
-
-    try {
-        echo "Checking connection...<br>";
-        \DB::connection()->getPdo();
-        echo "Connection successful!<br><br>";
-
-        if ($step === 'migrate' || $step === 'all') {
-            echo "Running migrations...<br>";
-            \Illuminate\Support\Facades\Artisan::call('migrate', [
-                '--force' => true,
-            ]);
-            echo "Migrations output:<br><pre>" . \Illuminate\Support\Facades\Artisan::output() . "</pre><br>";
-        }
-
-        if ($step === 'seed' || $step === 'all') {
-            echo "Running seeders...<br>";
-            \Illuminate\Support\Facades\Artisan::call('db:seed', [
-                '--force' => true,
-            ]);
-            echo "Seeders output:<br><pre>" . \Illuminate\Support\Facades\Artisan::output() . "</pre><br>";
-        }
-
-        return "Database Step ($step) Successful! <br><br> <a href='/init-db?step=seed'>Click here to Seed (if you only migrated)</a> | <a href='/'>Go to Home</a>";
-    } catch (\Exception $e) {
-        return "Error occurred in step ($step):<br><pre>" . $e->getMessage() . "\n\n" . $e->getTraceAsString() . "</pre>";
-    }
-});
 
 Route::get('/', function () {
     $services = \App\Models\Service::all();
