@@ -4,15 +4,18 @@
 try {
     // Force cache and log paths to /tmp for Vercel's read-only filesystem
     $storagePath = '/tmp/storage';
-    if (!is_dir("$storagePath/framework/cache")) {
-        mkdir("$storagePath/framework/cache", 0755, true);
+    $version = getenv('VERCEL_GIT_COMMIT_SHA') ?: 'latest';
+    $cachePath = "$storagePath/framework/cache/$version";
+    
+    if (!is_dir($cachePath)) {
+        mkdir($cachePath, 0755, true);
     }
     
-    putenv("APP_SERVICES_CACHE=$storagePath/services.php");
-    putenv("APP_PACKAGES_CACHE=$storagePath/packages.php");
-    putenv("APP_CONFIG_CACHE=$storagePath/config.php");
-    putenv("APP_ROUTES_CACHE=$storagePath/routes.php");
-    putenv("APP_EVENTS_CACHE=$storagePath/events.php");
+    putenv("APP_SERVICES_CACHE=$cachePath/services.php");
+    putenv("APP_PACKAGES_CACHE=$cachePath/packages.php");
+    putenv("APP_CONFIG_CACHE=$cachePath/config.php");
+    putenv("APP_ROUTES_CACHE=$cachePath/routes.php");
+    putenv("APP_EVENTS_CACHE=$cachePath/events.php");
 
     require __DIR__ . '/../public/index.php';
 } catch (\Throwable $e) {
