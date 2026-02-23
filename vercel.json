@@ -8,11 +8,7 @@
     },
     "routes": [
         {
-            "src": "/build/(.*)",
-            "dest": "/public/build/$1"
-        },
-        {
-            "src": "/(css|js|images|favicon.ico)(.*)",
+            "src": "/(build|css|js|images|favicon.ico|assets|plugins|vendor)(.*)",
             "dest": "/public/$1$2"
         },
         {
