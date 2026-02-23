@@ -10,25 +10,32 @@ Route::get('/init-db', function () {
     config(['session.driver' => 'file']);
     config(['app.debug' => true]);
 
-    try {
-        echo "<h3>Debug Connection Info:</h3>";
-        echo "Host: " . config('database.connections.pgsql.host') . "<br>";
-        echo "Port: " . config('database.connections.pgsql.port') . "<br>";
-        echo "User: " . config('database.connections.pgsql.username') . "<br>";
-        echo "DB: " . config('database.connections.pgsql.database') . "<br><br>";
+    $step = request('step', 'all');
 
+    try {
         echo "Checking connection...<br>";
         \DB::connection()->getPdo();
         echo "Connection successful!<br><br>";
 
-        echo "Running migrations...<br>";
-        \Illuminate\Support\Facades\Artisan::call('migrate:fresh', [
-            '--seed' => true,
-            '--force' => true,
-        ]);
-        return "Database Initialization Successful! <br><br><pre>" . \Illuminate\Support\Facades\Artisan::output() . "</pre>";
+        if ($step === 'migrate' || $step === 'all') {
+            echo "Running migrations...<br>";
+            \Illuminate\Support\Facades\Artisan::call('migrate', [
+                '--force' => true,
+            ]);
+            echo "Migrations output:<br><pre>" . \Illuminate\Support\Facades\Artisan::output() . "</pre><br>";
+        }
+
+        if ($step === 'seed' || $step === 'all') {
+            echo "Running seeders...<br>";
+            \Illuminate\Support\Facades\Artisan::call('db:seed', [
+                '--force' => true,
+            ]);
+            echo "Seeders output:<br><pre>" . \Illuminate\Support\Facades\Artisan::output() . "</pre><br>";
+        }
+
+        return "Database Step ($step) Successful! <br><br> <a href='/init-db?step=seed'>Click here to Seed (if you only migrated)</a> | <a href='/'>Go to Home</a>";
     } catch (\Exception $e) {
-        return "Error occurred:<br><pre>" . $e->getMessage() . "\n\n" . $e->getTraceAsString() . "</pre>";
+        return "Error occurred in step ($step):<br><pre>" . $e->getMessage() . "\n\n" . $e->getTraceAsString() . "</pre>";
     }
 });
 
