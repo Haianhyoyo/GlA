@@ -11,6 +11,12 @@ Route::get('/init-db', function () {
     config(['app.debug' => true]);
 
     try {
+        echo "<h3>Debug Connection Info:</h3>";
+        echo "Host: " . config('database.connections.pgsql.host') . "<br>";
+        echo "Port: " . config('database.connections.pgsql.port') . "<br>";
+        echo "User: " . config('database.connections.pgsql.username') . "<br>";
+        echo "DB: " . config('database.connections.pgsql.database') . "<br><br>";
+
         echo "Checking connection...<br>";
         \DB::connection()->getPdo();
         echo "Connection successful!<br><br>";
