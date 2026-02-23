@@ -11,7 +11,7 @@
 <body>
     <div class="top-bar">
         <div style="max-width: 1200px; margin: 0 auto; padding: 0 20px; display: flex; justify-content: space-between;">
-            <span><i class="fas fa-map-marker-alt"></i> {{ $g_settings['address'] ?? 'Số 10, ngõ 183, Đặng Tiến Đông, Đống Đa, Hà Nội' }}</span>
+            <span><i class="fas fa-map-marker-alt"></i> {{ $g_settings['address'] ?? 'Số 32, Tổ 31A Phố Nam Đồng, Phường Kim Liên, Thành Phố Hà Nội' }}</span>
             <span><i class="fas fa-phone"></i> Hotline: {{ $g_settings['hotline'] ?? '09 7374 8888' }}</span>
         </div>
     </div>
@@ -51,7 +51,7 @@
             <div>
                 <h3>{{ $g_settings['website_name'] ?? 'PHÒNG KHÁM 8/3' }}</h3>
                 <p>Tận tâm - Nhiệt tình - Chu đáo</p>
-                <p>Địa chỉ: {{ $g_settings['address'] ?? '183 Đặng Tiến Đông, Đống Đa, Hà Nội' }}</p>
+                <p>Địa chỉ: {{ $g_settings['address'] ?? 'Số 32, Tổ 31A Phố Nam Đồng, Phường Kim Liên, Thành Phố Hà Nội' }}</p>
             </div>
             <div>
                 <h3>DỊCH VỤ</h3>
