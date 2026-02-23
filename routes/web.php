@@ -1,14 +1,23 @@
 use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
 
 Route::get('/init-db', function () {
+    // Force some configs to ensure we can run migrations
+    config(['session.driver' => 'file']);
+    config(['app.debug' => true]);
+
     try {
+        echo "Checking connection...<br>";
+        \DB::connection()->getPdo();
+        echo "Connection successful!<br><br>";
+
+        echo "Running migrations...<br>";
         \Illuminate\Support\Facades\Artisan::call('migrate:fresh', [
             '--seed' => true,
             '--force' => true,
         ]);
         return "Database Initialization Successful! <br><br><pre>" . \Illuminate\Support\Facades\Artisan::output() . "</pre>";
     } catch (\Exception $e) {
-        return "Error: " . $e->getMessage();
+        return "Error occurred:<br><pre>" . $e->getMessage() . "\n\n" . $e->getTraceAsString() . "</pre>";
     }
 });
 
