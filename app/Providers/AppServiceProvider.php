@@ -25,10 +25,28 @@ class AppServiceProvider extends ServiceProvider
 
         // Set compiled view path to /tmp for Vercel
         if (env('VERCEL')) {
-            config(['view.compiled' => '/tmp/storage/framework/views']);
+            $storagePath = '/tmp/storage';
             
-            if (!is_dir('/tmp/storage/framework/views')) {
-                mkdir('/tmp/storage/framework/views', 0755, true);
+            // Redirect various paths to /tmp
+            config(['view.compiled' => "$storagePath/framework/views"]);
+            config(['session.files' => "$storagePath/framework/sessions"]);
+            config(['cache.stores.file.path' => "$storagePath/framework/cache"]);
+            
+            // Critical: Redirect logs to stderr to avoid read-only filesystem error
+            config(['logging.default' => 'stderr']);
+
+            // Ensure directories exist
+            $dirs = [
+                "$storagePath/framework/views",
+                "$storagePath/framework/sessions",
+                "$storagePath/framework/cache",
+                "$storagePath/logs",
+            ];
+
+            foreach ($dirs as $dir) {
+                if (!is_dir($dir)) {
+                    mkdir($dir, 0755, true);
+                }
             }
         }
     }
