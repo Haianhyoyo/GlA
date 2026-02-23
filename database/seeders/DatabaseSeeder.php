@@ -15,6 +15,11 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
+        $this->call([
+            AdminUserSeeder::class,
+            WebsiteSettingSeeder::class,
+        ]);
+
         // Services
         \App\Models\Service::create([
             'title' => 'Siêu âm',
