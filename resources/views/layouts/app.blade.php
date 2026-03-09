@@ -27,7 +27,7 @@
                         <h2 style="margin: 0; color: var(--primary-blue);">{{ $g_settings['website_logo'] }}</h2>
                     @endif
                 @else
-                    <img src="https://via.placeholder.com/150x50?text=PHONG+KHAM+8/3" alt="Logo">
+                    <img src="/images/logo-gla.png" alt="Logo" style="height: 50px;">
                 @endif
             </div>
             <div class="nav-links">

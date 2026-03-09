@@ -6,17 +6,6 @@ use App\Http\Controllers\Admin\AuthController as AdminAuthController;
 use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
 
 
-Route::get('/init-db', function () {
-    $step = request('step', 'all');
-    try {
-        if ($step === 'seed' || $step === 'all') {
-            \Illuminate\Support\Facades\Artisan::call('db:seed', ['--force' => true]);
-            return "Seeding Successful! <br><br> <a href='/admin/login'>Go to Admin Login</a>";
-        }
-    } catch (\Exception $e) {
-        return "Error: " . $e->getMessage();
-    }
-});
 
 Route::get('/', function () {
     $services = \App\Models\Service::all();

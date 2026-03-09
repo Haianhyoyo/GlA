@@ -12,7 +12,7 @@ class WebsiteSettingSeeder extends Seeder
         $settings = [
             [
                 'key' => 'website_logo',
-                'value' => 'Logo', // Placeholder text logo
+                'value' => '/images/logo-gla.png', // New gold logo
                 'type' => 'image',
             ],
             [
