@@ -19,6 +19,16 @@ class SettingController extends Controller
         $data = $request->except('_token');
         
         foreach ($data as $key => $value) {
+            // Handle URL inputs for images (e.g., website_logo_url)
+            if (str_ends_with($key, '_url')) {
+                $realKey = substr($key, 0, -4);
+                $setting = Setting::where('key', $realKey)->first();
+                if ($setting && $setting->type === 'image' && !empty($value)) {
+                    $setting->update(['value' => $value]);
+                }
+                continue;
+            }
+
             $setting = Setting::where('key', $key)->first();
             if ($setting) {
                 if ($setting->type === 'image' && $request->hasFile($key)) {

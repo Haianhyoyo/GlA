@@ -38,7 +38,9 @@
                                     @endif
                                 @endif
                             </div>
-                            <input type="file" name="{{ $setting->key }}" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 8px;">
+                            <input type="file" name="{{ $setting->key }}" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 8px; margin-bottom: 10px;">
+                            <div style="font-size: 0.8rem; color: #666; margin-bottom: 5px;">Hoặc dán URL ảnh vào đây:</div>
+                            <input type="text" name="{{ $setting->key }}_url" placeholder="https://example.com/logo.png" style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px;">
                         @elseif($setting->type === 'textarea')
                             <textarea name="{{ $setting->key }}" rows="3" style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px;">{{ $setting->value }}</textarea>
                         @else
