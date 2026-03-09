@@ -20,7 +20,8 @@
         <nav class="navbar">
             <div class="logo">
                 @if(isset($g_settings['website_logo']))
-                    @if(Str::startsWith($g_settings['website_logo'], '/uploads'))
+                    @if(Str::startsWith($g_settings['website_logo'], ['/uploads', 'http', 'https']) 
+                        || Str::endsWith(strtolower($g_settings['website_logo']), ['.png', '.jpg', '.jpeg', '.svg', '.webp']))
                         <img src="{{ $g_settings['website_logo'] }}" alt="Logo" style="height: 50px;">
                     @else
                         <h2 style="margin: 0; color: var(--primary-blue);">{{ $g_settings['website_logo'] }}</h2>
