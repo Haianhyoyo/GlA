@@ -30,17 +30,15 @@
 
                         @if($setting->type === 'image')
                             <div style="margin-bottom: 10px;">
-                                @if($setting->value)
-                                    @if(Str::startsWith($setting->value, '/uploads'))
-                                        <img src="{{ $setting->value }}" style="max-height: 100px; border: 1px solid #ddd; padding: 5px; border-radius: 4px;">
-                                    @else
-                                        <div style="font-weight: bold; font-size: 1.2rem; display: inline-block; padding: 10px; border: 1px solid #ddd; background: #f9f9f9;">{{ $setting->value }}</div>
-                                    @endif
+                                @if($setting->value && Str::startsWith($setting->value, ['/uploads', 'http', 'https', '/images']))
+                                    <img src="{{ $setting->value }}" style="max-height: 100px; border: 1px solid #ddd; padding: 5px; border-radius: 4px; display: block; margin-bottom: 10px;">
                                 @endif
                             </div>
-                            <input type="file" name="{{ $setting->key }}" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 8px; margin-bottom: 10px;">
-                            <div style="font-size: 0.8rem; color: #666; margin-bottom: 5px;">Hoặc dán URL ảnh vào đây:</div>
-                            <input type="text" name="{{ $setting->key }}_url" placeholder="https://example.com/logo.png" style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px;">
+                            <div style="font-size: 0.8rem; color: #666; margin-bottom: 5px;">Đường dẫn/URL ảnh:</div>
+                            <input type="text" name="{{ $setting->key }}" value="{{ $setting->value }}" placeholder="Dán URL ảnh hoặc để trống để dùng mặc định" style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px; margin-bottom: 15px;">
+                            
+                            <div style="font-size: 0.8rem; color: #666; margin-bottom: 5px;">Hoặc tải lên file mới:</div>
+                            <input type="file" name="{{ $setting->key }}" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 8px;">
                         @elseif($setting->type === 'textarea')
                             <textarea name="{{ $setting->key }}" rows="3" style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px;">{{ $setting->value }}</textarea>
                         @else
